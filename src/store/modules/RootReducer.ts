@@ -1,6 +1,6 @@
 import { combineReducers } from '@reduxjs/toolkit';
-import ContadorSlice from './ContadorSlice';
+import { PersonSlice } from './PersonSlice';
 
 export default combineReducers({
-  contador: ContadorSlice,
+  person: PersonSlice,
 });

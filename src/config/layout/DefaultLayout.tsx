@@ -12,9 +12,9 @@ export const DefaultLayout: React.FC<DefaultLayoutProps> = ({ children }) => {
       <Grid item xs={12}>
         <ResponsiveAppBar />
       </Grid>
-
       <Grid item xs={12}>
-        <Container sx={{ marginTop: '20px' }}>{children}</Container>
+        {/* <Container sx={{ marginTop: '20px' }}>{children}</Container> */}
+        <GridContainerWelcome />
       </Grid>
     </Grid>
   );

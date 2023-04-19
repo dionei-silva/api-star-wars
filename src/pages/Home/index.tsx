@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Button, Grid, TextField } from '@mui/material';
 import TitlePage from '../../components/TitlePage';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 // import CharacterList from './CharacterList'; // Importa o componente de lista de personagens
@@ -17,7 +18,7 @@ export const Home: React.FC = () => {
   const people = useAppSelector((state) => state.person);
 
   useEffect(() => {
-    dispatch(getAllPerson(1));
+    dispatch(getAllPerson(5));
   }, []);
 
   /* useEffect(() => {
@@ -37,20 +38,22 @@ export const Home: React.FC = () => {
   };
 
   /* const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-     Função para atualizar o estado do termo de busca
+Função para atualizar o estado do termo de busca
   }; */
 
   const handleSearchClick = () => {
     // Função para reiniciar a busca na primeira página
   };
-
   return (
-    <div>
-      {/* <TitlePage title="Home" />
-      <input type="text" value={searchTerm} onChange={handleSearchChange} />
-      <button onClick={handleSearchClick}>Buscar</button>
-      <CharacterList characters={characters} />
-      <Pagination currentPage={currentPage} handlePrevPage={handlePrevPage} handleNextPage={handleNextPage} /> */}
-    </div>
+    <Grid container>
+      <Grid item xs={6}>
+        <Button color="secondary" fullWidth>
+          Listar personagens
+        </Button>
+      </Grid>
+      <Grid item xs={6}>
+        <TextField margin="normal" variant="outlined" type="text" id="person" label="Buscar um personagem" fullWidth />
+      </Grid>
+    </Grid>
   );
 };

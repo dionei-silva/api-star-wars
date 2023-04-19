@@ -9,7 +9,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { Badge } from '@mui/material';
 import { routes } from '../Routers/routes';
@@ -18,7 +18,6 @@ const BADGE_CONTENT = 0;
 
 function ResponsiveAppBar() {
   const navigate = useNavigate();
-  const title = 'Template';
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -34,26 +33,6 @@ function ResponsiveAppBar() {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Badge badgeContent={BADGE_CONTENT} color="secondary">
-            <Typography
-              variant="h6"
-              noWrap
-              component={Link}
-              to="/"
-              sx={{
-                mr: 2,
-                display: { xs: 'none', md: 'flex' },
-                fontFamily: 'monospace',
-                fontWeight: 700,
-                letterSpacing: '.3rem',
-                color: 'inherit',
-                textDecoration: 'none',
-              }}
-            >
-              {title}
-            </Typography>
-          </Badge>
-
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
@@ -96,24 +75,7 @@ function ResponsiveAppBar() {
               ))}
             </Menu>
           </Box>
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: 'flex', md: 'none' },
-              flexGrow: 1,
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            {title}
-          </Typography>
+          <Box component="img" src="./assets/images/star-wars-logo.png" width="12%" />
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: { md: 'flex-end' } }}>
             {routes.map((page) => {
               return page.path === '/counter' ? (

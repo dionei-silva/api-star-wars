@@ -6,6 +6,7 @@ interface person {
   name: string;
   height: string;
   mass: string;
+  films: string[];
 }
 
 export interface apiResponse {

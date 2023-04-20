@@ -6,8 +6,9 @@ const defaultTheme = createTheme({
       main: '#000000',
     },
     secondary: {
-      main: '#000000',
+      main: '#ccc',
     },
+    mode: 'dark',
   },
 });
 

@@ -1,59 +1,54 @@
-import React, { useState, useEffect } from 'react';
-import { Button, Grid, TextField } from '@mui/material';
-import TitlePage from '../../components/TitlePage';
+import * as React from 'react';
+import Typography from '@mui/material/Typography';
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
+import { Card, Grid } from '@mui/material';
+import { useDispatch } from 'react-redux';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-// import CharacterList from './CharacterList'; // Importa o componente de lista de personagens
-// import Pagination from './Pagination'; // Importa o componente de paginação
 import { getAllPerson } from '../../store/modules/PersonSlice';
 
-export const Home: React.FC = () => {
-  // eslint-disable-next-line no-unused-vars
-  const [characters, setCharacters] = useState([]);
-  // eslint-disable-next-line no-unused-vars
-  const [currentPage, setCurrentPage] = useState(1);
-  // eslint-disable-next-line no-unused-vars
-  const [searchTerm, setSearchTerm] = useState('');
+const Home: React.FC = () => {
+  const [page, setPage] = React.useState(1);
+  const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
+    setPage(value);
+  };
+  const peopleRedux = useAppSelector((state) => state.person.people);
   const dispatch = useAppDispatch();
 
-  const people = useAppSelector((state) => state.person);
+  React.useEffect(() => {
+    dispatch(getAllPerson(page));
+    console.log('Alterou', page);
+  }, [page]);
 
-  useEffect(() => {
-    dispatch(getAllPerson(5));
-  }, []);
-
-  /* useEffect(() => {
-    fetchCharacters(currentPage);
-  }, [currentPage]);
-
-  const fetchCharacters = (page: number) => {
-    // Função para buscar personagens da API
-  };
-*/
-  const handlePrevPage = () => {
-    // Função para ir para a página anterior
-  };
-
-  const handleNextPage = () => {
-    // Função para ir para a próxima página
-  };
-
-  /* const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-Função para atualizar o estado do termo de busca
-  }; */
-
-  const handleSearchClick = () => {
-    // Função para reiniciar a busca na primeira página
-  };
   return (
     <Grid container>
-      <Grid item xs={6}>
-        <Button color="secondary" fullWidth>
-          Listar personagens
-        </Button>
+      <Grid item container>
+        <Grid
+          item
+          sx={{
+            width: '100%',
+            display: 'flex',
+            flexWrap: 'wrap',
+            gap: '8px',
+          }}
+        >
+          {peopleRedux.map((person) => (
+            <Card key={person.name}>
+              <Typography>{person.name}</Typography>
+              <Typography>{person.height}</Typography>
+              <Typography>{person.mass}</Typography>
+            </Card>
+          ))}
+        </Grid>
       </Grid>
-      <Grid item xs={6}>
-        <TextField margin="normal" variant="outlined" type="text" id="person" label="Buscar um personagem" fullWidth />
+      <Grid item>
+        <Stack spacing={2}>
+          <Typography>Page: {page}</Typography>
+          <Pagination count={10} page={page} onChange={handleChange} />
+        </Stack>
       </Grid>
     </Grid>
   );
 };
+
+export default Home;
